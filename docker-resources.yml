@@ -1,0 +1,81 @@
+version: '3.5'
+
+volumes:
+    monarchy_aut_log_data:
+    monarchy_log_data: 
+
+services:
+
+    monarchyautdb:
+        image: postgres
+        container_name: monarchyautdb
+        ports:
+            - "5435:5432"
+        environment:
+            "POSTGRES_USER": "monarchy"
+            "POSTGRES_PASSWORD": "monarchy123"
+        volumes:
+            - monarchy_aut_log_data:/var/lib/postgresql/data
+        networks:
+            - monarchy-resource-net
+        
+    monarchyautdbadmin:
+        image: dpage/pgadmin4
+        container_name: monarchyautdbadmin
+        ports:
+            - "888:80"
+        environment:
+            "PGADMIN_DEFAULT_EMAIL": "monarchy@localhost.com"
+            "PGADMIN_DEFAULT_PASSWORD": "monarchy123"
+        depends_on:
+            - monarchyautdb
+        networks:
+            - monarchy-resource-net
+            
+    monarchybus:
+        image: rabbitmq:3-management
+        container_name: monarchybus
+        hostname: monarchybus
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+            - "5671:5671"
+        volumes:
+            - ~/rabbitmq:/var/lib/rabbitmq/mnesia
+        networks:
+            - monarchy-resource-net
+            
+    monarchylog:
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+        container_name: monarchylog
+        environment:
+            - cluster.name=docker-cluster
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        ports:
+            - "9200:9200"
+        volumes:
+            - monarchy_log_data:/usr/share/elasticsearch/data
+        networks:
+            - monarchy-resource-net
+        
+    monarchylogadmin:
+        image: docker.elastic.co/kibana/kibana:6.4.0
+        container_name: monarchylogadmin
+        environment:
+            SERVER_NAME: localhost
+            ELASTICSEARCH_URL: http://monarchylog:9200
+        ports:
+            - "887:5601"
+        depends_on:
+            - monarchylog
+        networks:
+            - monarchy-resource-net
+
+networks:
+    monarchy-resource-net:
+        name: monarchy-net

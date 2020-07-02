@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  monarchy.authentication.api:
+    image: ${DOCKER_REGISTRY-}monarchyauthenticationapi
+    build:
+      context: .
+      dockerfile: Monarchy.Authentication.Api/Dockerfile
