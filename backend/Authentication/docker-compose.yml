@@ -1,8 +1,29 @@
-version: '3.4'
+version: '3.5'
 
 services:
   monarchy.authentication.api:
     image: ${DOCKER_REGISTRY-}monarchyauthenticationapi
+    container_name: monarchyautapi
     build:
       context: .
       dockerfile: Monarchy.Authentication.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Microservice=Authentication
+      - GatewayBus__Host=rabbitmq://monarchybus
+      - GatewayBus__Path=gateway
+      - GatewayBus__TimeoutSecs=60
+      - AuthenticationBus__UserName=guest
+      - AuthenticationBus__Password=guest
+      - AuthenticationBus__Host=rabbitmq://monarchybus
+      - AuthenticationBus__TimeoutSecs=60
+      - AuthenticationBus__Path=authentication
+      - LoggerUrl=http://monarchylog:9200
+      - ConnectionString=host=monarchyautdb;Database=autdb;Username=monarchy;Password=monarchy123;Port=5432
+      - AdministratorPassword=monarchy123
+    networks:
+      - monarchy-aut-net
+networks:
+  monarchy-aut-net:
+    external:
+      name: monarchy-net

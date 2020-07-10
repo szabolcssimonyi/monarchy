@@ -15,19 +15,19 @@ namespace Monarchy.Authentication.Domain.Seeder
 {
     public class AuthenticationDomainSeeder : IDomainSeeder
     {
-        private readonly UserManager<UserModel> userManager;
+        private readonly UserManager<UserEntity> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly ILogger<AuthenticationDomainSeeder> logger;
         private readonly Configuration configuration;
         private string AdminRoleName = "administrator";
-        private UserModel AdminUserModel = new UserModel
+        private UserEntity AdminUserModel = new UserEntity
         {
             Email = "admin@localhost.com",
             UserName = "Administrator",
         };
 
         public AuthenticationDomainSeeder(
-            UserManager<UserModel> userManager,
+            UserManager<UserEntity> userManager,
             RoleManager<IdentityRole> roleManager,
             IOptions<Configuration> options,
             ILogger<AuthenticationDomainSeeder> logger)

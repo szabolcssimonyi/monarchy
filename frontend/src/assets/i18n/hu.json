@@ -1,0 +1,29 @@
+{
+    "GLOBAL": {
+        "CANCEL": "Mégsem",
+        "SUBMIT": "Elküld",
+        "GUEST": "Vendég",
+        "EXPAND": "Kinyit",
+        "REMOVE": "Töröl",
+        "TITLE": "Monarchy",
+        "WELCOME_PRE": "Üdv a fedélzeten"
+    },
+    "LOGIN": {
+        "LOGIN_LINK": "Login",
+        "LOGOUT_LINK": "Logout",
+        "TITLE": "Login",
+        "OK": "Belépés",
+        "MISSING_PASSWORD": "Jelszó kötelező",
+        "MISSING_EMAIL": "Email kötelező",
+        "EMAIL": "Email",
+        "PASSWORD": "Jelszó",
+        "ERROR": {
+            "SUCCESS": "Sikeres belépés",
+            "UNAUTHORIZED": "Belépés sikertelen",
+            "FAILED": "Belépés sikertelen"
+        }
+    },
+    "TOOLBAR": {
+        "DASHBOARD_LINK": "Indítópult"
+    }
+}

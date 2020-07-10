@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
@@ -20,6 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Monarchy.Core.Service" Version="0.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
@@ -34,6 +36,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Monarchy.Authentication.Domain\Monarchy.Authentication.Domain.csproj" />
     <ProjectReference Include="..\Monarchy.Authentication.Extensibility\Monarchy.Authentication.Extensibility.csproj" />
+    <ProjectReference Include="..\Monarchy.Authentication.Service\Monarchy.Authentication.Service.csproj" />
   </ItemGroup>
 
 

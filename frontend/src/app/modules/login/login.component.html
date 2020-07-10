@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{ 'LOGIN.TITLE' | translate }}</h1>
+<form #form="ngForm">
+    <div mat-dialog-content class="container">
+        <mat-form-field>
+            <label>{{ 'LOGIN.EMAIL' | translate }}</label>
+            <input matInput [(ngModel)]="data.email" name="email" #emailInput="ngModel" email required>
+            <mat-hint *ngIf="!emailInput.valid && emailInput.touched">{{ 'LOGIN.MISSING_EMAIL' | translate }}</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+            <label>{{ 'LOGIN.PASSWORD' | translate }}</label>
+            <input type='password' matInput [(ngModel)]="data.password" name="password" required
+                #passwordInput="ngModel">
+            <mat-hint *ngIf="!passwordInput.valid && passwordInput.touched">{{ 'LOGIN.MISSING_PASSWORD' | translate }}
+            </mat-hint>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="control-container">
+        <button mat-button mat-dialog-close>{{ 'GLOBAL.CANCEL' | translate }}</button>
+        <button mat-button [mat-dialog-close]="data" cdkFocusInitial>{{ 'LOGIN.OK' | translate }}</button>
+    </div>
+</form>

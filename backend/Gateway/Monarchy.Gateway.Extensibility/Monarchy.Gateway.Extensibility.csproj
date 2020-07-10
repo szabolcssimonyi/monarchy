@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Monarchy.Authentication.Extensibility" Version="0.0.2" />
+    <PackageReference Include="Monarchy.Core.Extensibility" Version="0.0.1" />
+  </ItemGroup>
 
 </Project>

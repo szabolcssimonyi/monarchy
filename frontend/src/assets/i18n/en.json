@@ -1,0 +1,29 @@
+{
+    "GLOBAL": {
+        "CANCEL": "Cancel",
+        "SUBMIT": "Submit",
+        "GUEST": "Guest",
+        "EXPAND": "Expand",
+        "REMOVE": "Remove",
+        "TITLE": "Monarchy",
+        "WELLCOME_PRE": "Wellcome on board"
+    },
+    "LOGIN": {
+        "LOGIN_LINK": "Login",
+        "LOGOUT_LINK": "Logout",
+        "TITLE": "Login",
+        "OK": "Ok",
+        "MISSING_PASSWORD": "Missing password",
+        "MISSING_EMAIL": "Missing email",
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "ERROR": {
+            "SUCCESS": "Login successed",
+            "UNAUTHORIZED": "Login unsuccessful",
+            "FAILED": "Failed"
+        }
+    },
+    "TOOLBAR": {
+        "DASHBOARD_LINK": "Dashboard"
+    }
+}

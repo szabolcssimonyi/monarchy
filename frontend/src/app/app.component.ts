@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PageService } from './services/page.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Monarchy';
+
+  constructor(public pageService: PageService, public translateService: TranslateService) {
+    this.translateService.use('en');
+  }
 }

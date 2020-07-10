@@ -1,6 +1,6 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,14 +11,16 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Monarchy.Authentication.Domain.Context;
-using Monarchy.Authentication.Extensibility;
+using Monarchy.Authentication.Extensibility.Interface;
 using Monarchy.Authentication.Extensibility.Model;
+using Monarchy.Authentication.Extensibility.Profile;
 using Monarchy.Core.Extensibility.Extension;
 using Monarchy.Core.Extensibility.Interface;
 using Serilog;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using AuthConfiguration = Monarchy.Authentication.Extensibility.Configuration;
 
 namespace Monarchy.Authentication.Api
 {
@@ -37,11 +39,12 @@ namespace Monarchy.Authentication.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.Configure<Configuration>(Configuration);
+            services.Configure<AuthConfiguration>(Configuration);
+            services.AddAutoMapper(typeof(AuthenticationProfile));
 
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<AuthenticationDbContext>();
-            services.AddIdentity<UserModel, IdentityRole>()
+            services.AddIdentity<UserEntity, IdentityRole>()
                 .AddEntityFrameworkStores<AuthenticationDbContext>()
                 .AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
@@ -58,19 +61,17 @@ namespace Monarchy.Authentication.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Monarchy Authentication", Version = "v1" });
             });
 
-            var configuration = Configuration.Get<Configuration>();
-
             services.AddOptions();
 
             services.AddControllers();
         }
+
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var configuration = Configuration.Get<Configuration>();
+            var configuration = Configuration.Get<AuthConfiguration>();
             builder.InitializeMassTransit(Assembly.GetExecutingAssembly(), configuration.AuthenticationBus);
             builder.RegisterModule(new AutofacModule());
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider, ILoggerFactory loggerFactory)

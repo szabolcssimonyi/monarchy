@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 
 services:
   monarchy.gateway.api:
@@ -6,3 +6,22 @@ services:
     build:
       context: .
       dockerfile: Monarchy.Gateway.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Microservice=Gateway
+      - GatewayBus__UserName=guest
+      - GatewayBus__Password=guest
+      - GatewayBus__Host=rabbitmq://monarchybus
+      - GatewayBus__Path=gateway
+      - GatewayBus__TimeoutSecs=60
+      - AuthenticationBus__Host=rabbitmq://monarchybus
+      - AuthenticationBus__TimeoutSecs=60
+      - AuthenticationBus__Path=authentication
+      - Secret=3rF2%A@(UBr}*"6;fpJ~YUX]8hDCwBEw
+      - LoggerUrl=http://monarchylog:9200
+    networks:
+      - monarchy-gateway-net
+networks:
+  monarchy-gateway-net:
+    external:
+      name: monarchy-net

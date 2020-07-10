@@ -1,0 +1,30 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-content class="mat-sidenav-content">
+        <mat-toolbar color="primary" class="toolbar">
+            <span class="toolbar-title">{{ 'GLOBAL.TITLE' | translate }}</span>
+            <ng-container *ngIf="userService.isLoggedIn">
+                <a *ngFor="let item of menu" type="button" [routerLink]="item.route"
+                    [appHasPermission]="item.permissions" routerLinkActive="active" mat-button>
+                    {{ item.label | translate }}
+                </a>
+            </ng-container>
+            <a mat-button *ngIf="user">
+                {{ 'GLOBAL.WELLCOME_PRE' | translate }}
+                <ng-container *ngIf="user.userName">{{ user.userName }}</ng-container>
+                <ng-container *ngIf="!user.userName">{{ 'GLOBAL.GUEST' | translate}}</ng-container>
+            </a>
+            <a type="button" mat-button (click)="login()" *ngIf="!userService.isLoggedIn">
+                {{ 'LOGIN.LOGIN_LINK' | translate }}
+            </a>
+            <a type="button" mat-button (click)="userService.clear()" *ngIf="userService.isLoggedIn">
+                {{ 'LOGIN.LOGOUT_LINK' | translate }}
+            </a>
+        </mat-toolbar>
+        <ng-template *ngIf="pageService.isLoading else container">
+            <div class='loading'>Loading...</div>
+        </ng-template>
+        <ng-template #container>
+            <router-outlet *ngIf="userService.isLoggedIn"></router-outlet>
+        </ng-template>
+    </mat-sidenav-content>
+</mat-sidenav-container>

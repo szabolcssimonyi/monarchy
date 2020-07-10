@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Monarchy.Authentication.Domain.Context
 {
-    public class AuthenticationDbContext: IdentityDbContext<UserModel>
+    public class AuthenticationDbContext: IdentityDbContext<UserEntity>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
